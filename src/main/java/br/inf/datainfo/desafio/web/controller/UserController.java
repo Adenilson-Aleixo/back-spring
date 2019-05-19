@@ -5,10 +5,10 @@ import br.inf.datainfo.desafio.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -16,14 +16,13 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-//    private @Value("#{messagesProperties['user.MN001']}") String message;
 
     @Autowired
     private Environment env;
 
     @GetMapping("/all")
-    ResponseEntity<?> findAll() {
-        List<User> users = userService.findAll();
+    ResponseEntity<?> findAll(Pageable pageable) {
+        Page<User> users = userService.findAll(pageable);
         return ResponseEntity.ok().body(users);
     }
 
