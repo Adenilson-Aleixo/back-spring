@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <USUARIO_EXTERNO/>
+
+    <FUNCAO_USUARIO_EXTERNO co_funcao="1" no_funcao="Gestor"/>
+    <FUNCAO_USUARIO_EXTERNO co_funcao="2" no_funcao="Administrador"/>
+    <FUNCAO_USUARIO_EXTERNO co_funcao="3" no_funcao="Frente de Caixa"/>
+</dataset>

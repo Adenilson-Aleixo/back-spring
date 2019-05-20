@@ -2,6 +2,7 @@ package br.inf.datainfo.desafio.web.controller;
 
 import br.inf.datainfo.desafio.domain.entity.User;
 import br.inf.datainfo.desafio.domain.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("user")
 @PropertySource("classpath:messages.properties")
+@AllArgsConstructor
 public class UserController {
     @Autowired
     private UserService userService;
@@ -21,11 +23,17 @@ public class UserController {
     private Environment env;
 
     @GetMapping("/all")
-    ResponseEntity<?> findAll(Pageable pageable) {
-        Page<User> users = userService.findAll(pageable);
+    ResponseEntity<?> findAll(
+        Pageable pageable,
+        @RequestParam("onlyEnable") final String onlyEnable,
+        @RequestParam("noUser") final String noUser,
+        @RequestParam("icUserProfile") final String icUserProfile ) {
+
+        Page<User> users = userService.filter(pageable, noUser, onlyEnable, icUserProfile);
         return ResponseEntity.ok().body(users);
     }
 
+    @CrossOrigin
     @PostMapping("/save")
     ResponseEntity<?> save(@RequestBody User newUser) {
         try {
@@ -46,6 +54,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping(path = "/disable/{nuCpf}")
     public ResponseEntity<?> disableUser(
             @PathVariable("nuCpf") final String nuCpf,
@@ -62,6 +71,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/update")
     ResponseEntity<?> update(@RequestBody User newUser) {
         try {

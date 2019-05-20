@@ -27,6 +27,26 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
+    public Page<User> filter(Pageable pageable, String noUser, String onlyEnable, String icUserProfile){
+        if (noUser == "" && onlyEnable == "" && icUserProfile == "") {
+            return userRepository.findAll(pageable);
+        }
+
+        if (noUser != "") {
+            return userRepository.filterNoUser(pageable, noUser);
+        }
+
+        if (onlyEnable != "") {
+            return userRepository.filterOnlyEnable(pageable, onlyEnable);
+        }
+
+        if (icUserProfile != "") {
+            return userRepository.filterIcUserProfile(pageable, Integer.parseInt(icUserProfile));
+        }
+
+        return userRepository.filterByNoUserAndOnlyEnableAndIcUserProfile(pageable, noUser, onlyEnable, Integer.parseInt(icUserProfile));
+    }
+
     public User save(final User newUser) throws IOException{
         if (!cpfUtils.isValid(newUser.getNuCpf())) {
             throw new IOException(env.getProperty("user.MN035"));
