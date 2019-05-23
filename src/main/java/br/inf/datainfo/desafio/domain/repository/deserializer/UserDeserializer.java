@@ -26,10 +26,10 @@ public class UserDeserializer extends JsonDeserializer {
         user.setNoUser(node.get("noUser").textValue());
         user.setDeEmail(node.get("deEmail").textValue());
         user.setIcSituation(icSituation);
-        user.setIcUserProfile(Integer.parseInt(node.get("icUserProfile").textValue()));
+        user.setIcUserProfile(node.get("icUserProfile").intValue());
         user.setNuPhone(node.get("nuPhone").textValue());
 
-        Long coFunction = Long.parseLong(node.get("coFunction").textValue());
+        Long coFunction = node.get("coFunction").longValue();
         user.setExternalUserFunction(externalUserFunctionRepository.findByCoFunction(coFunction));
 
         return user;

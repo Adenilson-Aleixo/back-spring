@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@TestPropertySource("classpath:application-test.properties")
 public class UserControllerTest {
     private MockMvc mockMvc;
 
@@ -52,7 +50,6 @@ public class UserControllerTest {
                 .andReturn().getResponse();
 
         Assert.assertEquals( "Cadastro efetuado com sucesso!", response.getContentAsString());
-//                .andExpect(content().json(contentOf("json/expected/created_user.json"), true));
     }
 
     public String contentOf(final String filePath) throws IOException {

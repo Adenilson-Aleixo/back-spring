@@ -25,7 +25,4 @@ public class ExternalUserFunction implements Serializable {
     @NotNull(message="Function name can't be empty")
     @Column(name="no_funcao", length=50)
     private String noFunction;
-
-//    @OneToMany(mappedBy = "userFunction")
-//    private Set<User> users;
 }

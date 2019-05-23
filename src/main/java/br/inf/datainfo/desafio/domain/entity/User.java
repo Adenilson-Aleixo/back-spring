@@ -41,10 +41,8 @@ public class User implements Serializable {
     private Integer icUserProfile;
 
     @ManyToOne
-//    @Column(name="co_funcao")
     @JoinColumn(name = "co_funcao", nullable = false, foreignKey = @ForeignKey(name = "FK_eprtb008_eprtb016"))
     private ExternalUserFunction externalUserFunction;
-//    private Integer userFunction;
 
     @Column(name="nu_telefone")
     private String nuPhone;
